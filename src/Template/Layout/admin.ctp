@@ -9,13 +9,18 @@
 
   <title>Quirk Responsive Admin Templates</title>
 
-  <link rel="stylesheet" href="../lib/fontawesome/css/font-awesome.css">
-  <link rel="stylesheet" href="../lib/weather-icons/css/weather-icons.css">
-  <link rel="stylesheet" href="../lib/jquery-toggles/toggles-full.css">
+  <?= $this->Html->css('/lib/jquery-ui/jquery-ui.css'); ?>
+  <?= $this->Html->css('/lib/select2/select2.css'); ?>
+  <?= $this->Html->css('/lib/summernote/summernote.css'); ?>
+  <?= $this->Html->css('/lib/dropzone/dropzone.css'); ?>
+  <?= $this->Html->css('/lib/jquery-toggles/toggles-full.css'); ?>
+  <?= $this->Html->css('/lib/fontawesome/css/font-awesome.css'); ?>
+  <?= $this->Html->css('/lib/timepicker/jquery.timepicker.css'); ?>
+  <?= $this->Html->css('/lib/bootstrapcolorpicker/css/bootstrap-colorpicker.css'); ?>
+  <?= $this->Html->css('quirk.css'); ?>
 
-  <link rel="stylesheet" href="../css/quirk.css">
+  <?= $this->Html->script('/lib/modernizr/modernizr.js'); ?>
 
-  <script src="../lib/modernizr/modernizr.js"></script>
   <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!--[if lt IE 9]>
   <script src="../lib/html5shiv/html5shiv.js"></script>
@@ -477,26 +482,44 @@
     <div class="mainpanel">
 
       <div class="contentpanel">
-
-        <ol class="breadcrumb breadcrumb-quirk">
-          <li><a href="index.html"><i class="fa fa-home mr5"></i> Home</a></li>
-          <li><a href="buttons.html">Pages</a></li>
-          <li class="active">Blank</li>
-        </ol>
         
-        <?= $this->fetch('content') ?>
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="panel">
+              <div class="panel-heading">
+              </div>
+              <div class="panel-body">
+                <?= $this->fetch('content') ?>
+              </div>
+            </div>
+          </div>
+        </div>
         <!-- content goes here... -->
 
       </div><!-- contentpanel -->
     </div><!-- mainpanel -->
-</section>
+  </section>
 
-<script src="../lib/jquery/jquery.js"></script>
-<script src="../lib/jquery-ui/jquery-ui.js"></script>
-<script src="../lib/bootstrap/js/bootstrap.js"></script>
-<script src="../lib/jquery-toggles/toggles.js"></script>
+<?= $this->Html->script('/lib/jquery/jquery.js'); ?>
+<?= $this->Html->script('/lib/jquery-ui/jquery-ui.js'); ?>
+<?= $this->Html->script('/lib/bootstrap/js/bootstrap.js'); ?>
+<?= $this->Html->script('/lib/jquery-autosize/autosize.js'); ?>
+<?= $this->Html->script('/lib/select2/select2.js'); ?>
+<?= $this->Html->script('/lib/jquery-toggles/toggles.js'); ?>
+<?= $this->Html->script('/lib/jquery-maskedinput/jquery.maskedinput.js'); ?>
+<?= $this->Html->script('/lib/timepicker/jquery.timepicker.js'); ?>
+<?= $this->Html->script('/lib/bootstrapcolorpicker/js/bootstrap-colorpicker.js'); ?>
+<?= $this->Html->script('/lib/summernote/summernote.js'); ?>
+<?= $this->Html->script('/lib/dropzone/dropzone.js'); ?>
+<?= $this->Html->script('quirk.js') ?>
 
-<script src="../js/quirk.js"></script>
-
+<script type="text/javascript">
+  $('.summernote').summernote({
+    height: 200
+  });
+  Dropzone.options.thumbnail = {
+    maxFilesize: 1,
+  };
+</script>
 </body>
 </html>

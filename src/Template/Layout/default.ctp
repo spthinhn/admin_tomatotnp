@@ -281,9 +281,6 @@
           <!-- ################# MAIN MENU ################### -->
 
           <?= $this->element('menu') ?>
-          <?php  
-            var_dump($this->element('menu')); die('dasd');
-          ?>
 
           <!-- ######################## EMAIL MENU ##################### -->
 

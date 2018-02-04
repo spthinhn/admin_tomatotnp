@@ -50,7 +50,21 @@ Router::scope('/', function (RouteBuilder $routes) {
      * to use (in this case, src/Template/Pages/home.ctp)...
      */
     $routes->connect('/', ['controller' => 'Pages', 'action' => 'index']);
-    $routes->connect('/san-pham', ['controller' => 'Pages', 'action' => 'products']);
+    $routes->connect('/san-pham', ['controller' => 'Products', 'action' => 'index']);
+    $routes->connect('/san-pham/them-moi', ['controller' => 'Products', 'action' => 'add']);
+    $routes->connect('/bai-viet', ['controller' => 'Feeds', 'action' => 'index']);
+    $routes->connect('/bai-viet/them-moi', ['controller' => 'Feeds', 'action' => 'add']);
+    $routes->connect(
+        '/bai-viet/:id',
+        ['controller' => 'Feeds', 'action' => 'view'],
+        ['id' => '\d+', 'pass' => ['id']]
+    );
+    $routes->connect(
+        '/bai-viet/:id/chinh-sua',
+        ['controller' => 'Feeds', 'action' => 'edit'],
+        ['id' => '\d+', 'pass' => ['id']]
+    );
+    
 
     /**
      * ...and connect the rest of 'Pages' controller's URLs.
