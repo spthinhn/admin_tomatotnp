@@ -2,8 +2,23 @@
     <div class="row">
         <div class="col-xs-12">
             <div class="form-group">
+                <label for="post_type">Loại bài viết</label>
+                <select id="post_type" name="type" class="form-control" style="width: 100%" >
+                  <option value="post">Bài viết</option>
+                  <option value="introduce">Giới thiệu</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-xs-12" style="margin-top: 20px">
+            <div class="form-group">
                 <label for="title">Tiêu đề</label>
-                <input type="text" name="title" class="form-control" placeholder="Type your name..." required />
+                <input type="text" name="title" class="form-control" placeholder="Title" required />
+            </div>
+        </div>
+        <div class="col-xs-12" style="margin-top: 20px">
+            <div class="form-group">
+                <label for="title">Tiêu đề SEO</label>
+                <input type="text" name="alias" class="form-control" placeholder="Title SEO" required />
             </div>
         </div>
         <div class="col-xs-12" style="margin-top: 20px">

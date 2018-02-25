@@ -18,6 +18,7 @@ class CategoriesController extends AppController
      */
     public function index()
     {
+        $this->viewBuilder()->layout('admin');
         $categories = $this->paginate($this->Categories);
 
         $this->set(compact('categories'));
@@ -33,6 +34,7 @@ class CategoriesController extends AppController
      */
     public function view($id = null)
     {
+        $this->viewBuilder()->layout('admin');
         $category = $this->Categories->get($id, [
             'contain' => ['Products']
         ]);
@@ -48,10 +50,23 @@ class CategoriesController extends AppController
      */
     public function add()
     {
+        $this->viewBuilder()->layout('admin');
         $category = $this->Categories->newEntity();
         if ($this->request->is('post')) {
             $category = $this->Categories->patchEntity($category, $this->request->data);
-            if ($this->Categories->save($category)) {
+            if ($result = $this->Categories->save($category)) {
+                $last_id = $result->id;
+                $path = WWW_ROOT."upload/danh-muc/";
+                if (!file_exists($path)) {
+                    mkdir( $path, 0700);
+                }
+                $path = WWW_ROOT."upload/danh-muc/$last_id/";
+                if (!file_exists($path)) {
+                    mkdir( $path, 0700);
+                }
+                $category->thumbnail = "/upload/danh-muc/$last_id/".$category->files['name'];
+                $this->Categories->save($category);
+                move_uploaded_file($category->files['tmp_name'], $path. $category->files['name']);
                 $this->Flash->success(__('The category has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
@@ -71,12 +86,27 @@ class CategoriesController extends AppController
      */
     public function edit($id = null)
     {
+        $this->viewBuilder()->layout('admin');
         $category = $this->Categories->get($id, [
             'contain' => []
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $category = $this->Categories->patchEntity($category, $this->request->data);
-            if ($this->Categories->save($category)) {
+            if ($result = $this->Categories->save($category)) {
+                if ($category->files['name']) {
+                    $last_id = $result->id;
+                    $path = WWW_ROOT."upload/danh-muc/";
+                    if (!file_exists($path)) {
+                        mkdir( $path, 0700);
+                    }
+                    $path = WWW_ROOT."upload/danh-muc/$last_id/";
+                    if (!file_exists($path)) {
+                        mkdir( $path, 0700);
+                    }
+                    $category->thumbnail = "/upload/danh-muc/$last_id/".$category->files['name'];
+                    $this->Categories->save($category);
+                    move_uploaded_file($category->files['tmp_name'], $path. $category->files['name']);
+                }
                 $this->Flash->success(__('The category has been saved.'));
 
                 return $this->redirect(['action' => 'index']);

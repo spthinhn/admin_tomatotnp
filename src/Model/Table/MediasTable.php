@@ -55,20 +55,17 @@ class MediasTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
-            ->requirePresence('title', 'create')
-            ->notEmpty('title');
+            ->allowEmpty('title');
 
         $validator
-            ->requirePresence('url', 'create')
-            ->notEmpty('url');
+            ->allowEmpty('url');
 
         $validator
             ->requirePresence('type', 'create')
             ->notEmpty('type');
 
         $validator
-            ->requirePresence('uri', 'create')
-            ->notEmpty('uri');
+            ->allowEmpty('uri');
 
         return $validator;
     }

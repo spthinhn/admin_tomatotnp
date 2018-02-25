@@ -514,6 +514,16 @@
 <?= $this->Html->script('quirk.js') ?>
 
 <script type="text/javascript">
+  $('#media_type').change(function(){
+    var type = $(this).val();
+    if (type == 'image') {
+      $('#image_view').css('display', 'block');
+      $('#video_view').css('display', 'none');
+    } else {
+      $('#image_view').css('display', 'none');
+      $('#video_view').css('display', 'block');
+    }
+  });
   $('.summernote').summernote({
     height: 200
   });

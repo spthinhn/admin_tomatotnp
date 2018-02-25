@@ -9,6 +9,8 @@ use Cake\ORM\Entity;
  * @property int $id
  * @property string $title
  * @property string $description
+ * @property string $alias
+ * @property string $thumbnail
  *
  * @property \App\Model\Entity\Product[] $products
  */

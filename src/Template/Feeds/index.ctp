@@ -10,18 +10,18 @@
     </ul>
 </nav>
 <div class="feeds index large-9 medium-8 columns content">
-    <h3><?= __('Feeds') ?></h3>
+    <h3><?= __('Danh sách bài viết') ?></h3>
 
     <div class="table-responsive">
         <table class="table table-bordered table-inverse nomargin">
             <thead>
                 <tr>
-                    <th scope="col" width="5%"><?= $this->Paginator->sort('id') ?></th>
-                    <th scope="col" width="10%"><?= $this->Paginator->sort('thumbnail') ?></th>
-                    <th scope="col" width="15%"><?= $this->Paginator->sort('title') ?></th>
-                    <th scope="col" width="30%"><?= $this->Paginator->sort('summary') ?></th>
-                    <th scope="col" width="15%"><?= $this->Paginator->sort('time_created') ?></th>
-                    <th scope="col" width="10%"class="actions"><?= __('Actions') ?></th>
+                    <th scope="col" width="5%"><?= $this->Paginator->sort('#') ?></th>
+                    <th scope="col" width="10%"><?= $this->Paginator->sort('') ?></th>
+                    <th scope="col" width="15%"><?= $this->Paginator->sort('Tiêu đề') ?></th>
+                    <th scope="col" width="30%"><?= $this->Paginator->sort('Nội dung tóm tắt') ?></th>
+                    <th scope="col" width="15%"><?= $this->Paginator->sort('Thời gian') ?></th>
+                    <th scope="col" width="10%"class="actions"><?= __('') ?></th>
                 </tr>
             </thead>
             <tbody>
@@ -32,7 +32,7 @@
                     <td><?= $this->Html->image($feed->thumbnail, ["width" => "100%"]) ?></td>
                     <td><?= h($feed->title) ?></td>
                     <td><?= h($feed->summary) ?></td>
-                    <td><?= h($feed->time_created) ?></td>
+                    <td><?= h($feed->created) ?></td>
                     <td class="actions" align="center">
                         <button class="btn btn-primary btn-icon" onclick="location.href=('<?= $this->Url->build([
                             "action" => "view",

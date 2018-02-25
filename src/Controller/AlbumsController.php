@@ -16,10 +16,19 @@ class AlbumsController extends AppController
      *
      * @return \Cake\Network\Response|null
      */
-    public function index()
+    public function index($type)
     {
-        $albums = $this->paginate($this->Albums);
-
+        // switch ($type) {
+        //     case '':
+        //         # code...
+        //         break;
+            
+        //     default:
+        //         # code...
+        //         break;
+        // }
+        $this->viewBuilder()->layout('admin');
+        $albums = $this->paginate($this->Albums->find('all')->where(['type =' => $type]));
         $this->set(compact('albums'));
         $this->set('_serialize', ['albums']);
     }
@@ -33,6 +42,7 @@ class AlbumsController extends AppController
      */
     public function view($id = null)
     {
+        $this->viewBuilder()->layout('admin');
         $album = $this->Albums->get($id, [
             'contain' => ['Medias']
         ]);
@@ -48,10 +58,25 @@ class AlbumsController extends AppController
      */
     public function add()
     {
+        $this->viewBuilder()->layout('admin');
         $album = $this->Albums->newEntity();
         if ($this->request->is('post')) {
             $album = $this->Albums->patchEntity($album, $this->request->data);
-            if ($this->Albums->save($album)) {
+            $album->created = time();
+            if ($result = $this->Albums->save($album)) {
+                $last_id = $result->id;
+                $path = WWW_ROOT."upload/album/";
+                if (!file_exists($path)) {
+                    mkdir( $path, 0700);
+                }
+                $path = WWW_ROOT."upload/album/$last_id/";
+                if (!file_exists($path)) {
+                    mkdir( $path, 0700);
+                }
+                $album->thumbnail = "/upload/album/$last_id/".$album->files['name'];
+                $this->Albums->save($album);
+                move_uploaded_file($album->files['tmp_name'], $path. $album->files['name']);
+
                 $this->Flash->success(__('The album has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
@@ -71,15 +96,32 @@ class AlbumsController extends AppController
      */
     public function edit($id = null)
     {
+        $this->viewBuilder()->layout('admin');
         $album = $this->Albums->get($id, [
             'contain' => []
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $album = $this->Albums->patchEntity($album, $this->request->data);
-            if ($this->Albums->save($album)) {
+            $album->created = time();
+            if ($result = $this->Albums->save($album)) {
+                if (!$album->files['error']) {
+                    $last_id = $result->id;
+                    $path = WWW_ROOT."upload/album/";
+                    if (!file_exists($path)) {
+                        mkdir( $path, 0700);
+                    }
+                    $path = WWW_ROOT."upload/album/$last_id/";
+                    if (!file_exists($path)) {
+                        mkdir( $path, 0700);
+                    }
+                    $album->thumbnail = "/upload/album/$last_id/".$album->files['name'];
+                    $this->Albums->save($album);
+                    move_uploaded_file($album->files['tmp_name'], $path. $album->files['name']);
+                }
+
                 $this->Flash->success(__('The album has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'index', $album->type]);
             }
             $this->Flash->error(__('The album could not be saved. Please, try again.'));
         }
@@ -104,6 +146,6 @@ class AlbumsController extends AppController
             $this->Flash->error(__('The album could not be deleted. Please, try again.'));
         }
 
-        return $this->redirect(['action' => 'index']);
+        return $this->redirect(['action' => 'index', $album->type]);
     }
 }

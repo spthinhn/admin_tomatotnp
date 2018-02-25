@@ -49,19 +49,39 @@ class MediasController extends AppController
      *
      * @return \Cake\Network\Response|null Redirects on successful add, renders view otherwise.
      */
-    public function add()
+    public function add($album_id)
     {
+        $this->viewBuilder()->layout('admin');
         $media = $this->Medias->newEntity();
         if ($this->request->is('post')) {
             $media = $this->Medias->patchEntity($media, $this->request->data);
-            if ($this->Medias->save($media)) {
+            $media->album_id = $album_id;
+            if ($result = $this->Medias->save($media)) {
+                if ($media->type == "image") {
+                    $last_id = $result->id;
+                    $path = WWW_ROOT."upload/thu-vien/";
+                    if (!file_exists($path)) {
+                        mkdir( $path, 0700);
+                    }
+                    $path = WWW_ROOT."upload/thu-vien/$album_id/";
+                    if (!file_exists($path)) {
+                        mkdir( $path, 0700);
+                    }
+                    $path = WWW_ROOT."upload/thu-vien/$album_id/$last_id/";
+                    if (!file_exists($path)) {
+                        mkdir( $path, 0700);
+                    }
+                    $media->uri = "/upload/thu-vien/$album_id/$last_id/".$media->files['name'];
+                    $this->Medias->save($media);
+                    move_uploaded_file($media->files['tmp_name'], $path. $media->files['name']);
+                }
                 $this->Flash->success(__('The media has been saved.'));
-
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['controller' => 'Albums', 'action' => 'view', $album_id]);
             }
             $this->Flash->error(__('The media could not be saved. Please, try again.'));
         }
         $albums = $this->Medias->Albums->find('list', ['limit' => 200]);
+        $this->set('album_id', $album_id);
         $this->set(compact('media', 'albums'));
         $this->set('_serialize', ['media']);
     }
@@ -101,7 +121,6 @@ class MediasController extends AppController
      */
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
         $media = $this->Medias->get($id);
         if ($this->Medias->delete($media)) {
             $this->Flash->success(__('The media has been deleted.'));
@@ -109,6 +128,6 @@ class MediasController extends AppController
             $this->Flash->error(__('The media could not be deleted. Please, try again.'));
         }
 
-        return $this->redirect(['action' => 'index']);
+        return $this->redirect(['controller' => 'Albums', 'action' => 'view', $media->album_id]);
     }
 }

@@ -9,9 +9,11 @@ use Cake\ORM\Entity;
  * @property int $id
  * @property string $title
  * @property string $description
- * @property \Cake\I18n\Time $time_created
  * @property string $thumbnail
  * @property string $summary
+ * @property \Cake\I18n\Time $created
+ * @property string $alias
+ * @property string $type
  */
 class Feed extends Entity
 {

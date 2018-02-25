@@ -22,6 +22,10 @@
             <td><?= h($category->title) ?></td>
         </tr>
         <tr>
+            <th scope="row"><?= __('Alias') ?></th>
+            <td><?= h($category->alias) ?></td>
+        </tr>
+        <tr>
             <th scope="row"><?= __('Id') ?></th>
             <td><?= $this->Number->format($category->id) ?></td>
         </tr>

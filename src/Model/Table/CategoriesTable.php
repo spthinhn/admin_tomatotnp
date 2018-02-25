@@ -61,6 +61,13 @@ class CategoriesTable extends Table
             ->requirePresence('description', 'create')
             ->notEmpty('description');
 
+        $validator
+            ->requirePresence('alias', 'create')
+            ->notEmpty('alias');
+
+        $validator
+            ->allowEmpty('thumbnail');
+
         return $validator;
     }
 }

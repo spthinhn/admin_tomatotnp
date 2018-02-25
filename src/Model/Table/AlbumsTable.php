@@ -18,6 +18,8 @@ use Cake\Validation\Validator;
  * @method \App\Model\Entity\Album patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
  * @method \App\Model\Entity\Album[] patchEntities($entities, array $data, array $options = [])
  * @method \App\Model\Entity\Album findOrCreate($search, callable $callback = null, $options = [])
+ *
+ * @mixin \Cake\ORM\Behavior\TimestampBehavior
  */
 class AlbumsTable extends Table
 {
@@ -35,6 +37,8 @@ class AlbumsTable extends Table
         $this->table('albums');
         $this->displayField('title');
         $this->primaryKey('id');
+
+        $this->addBehavior('Timestamp');
 
         $this->hasMany('Medias', [
             'foreignKey' => 'album_id'
@@ -60,6 +64,17 @@ class AlbumsTable extends Table
         $validator
             ->requirePresence('description', 'create')
             ->notEmpty('description');
+
+        $validator
+            ->allowEmpty('thumbnail');
+
+        $validator
+            ->requirePresence('alias', 'create')
+            ->notEmpty('alias');
+
+        $validator
+            ->requirePresence('type', 'create')
+            ->notEmpty('type');
 
         return $validator;
     }

@@ -16,6 +16,8 @@ use Cake\Validation\Validator;
  * @method \App\Model\Entity\Feed patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
  * @method \App\Model\Entity\Feed[] patchEntities($entities, array $data, array $options = [])
  * @method \App\Model\Entity\Feed findOrCreate($search, callable $callback = null, $options = [])
+ *
+ * @mixin \Cake\ORM\Behavior\TimestampBehavior
  */
 class FeedsTable extends Table
 {
@@ -33,6 +35,8 @@ class FeedsTable extends Table
         $this->table('feeds');
         $this->displayField('title');
         $this->primaryKey('id');
+
+        $this->addBehavior('Timestamp');
     }
 
     /**
@@ -56,15 +60,18 @@ class FeedsTable extends Table
             ->notEmpty('description');
 
         $validator
-            ->dateTime('time_created')
-            ->requirePresence('time_created', 'create')
-            ->notEmpty('time_created');
-
-        $validator
             ->allowEmpty('thumbnail');
 
         $validator
             ->allowEmpty('summary');
+
+        $validator
+            ->requirePresence('alias', 'create')
+            ->notEmpty('alias');
+
+        $validator
+            ->requirePresence('type', 'create')
+            ->notEmpty('type');
 
         return $validator;
     }

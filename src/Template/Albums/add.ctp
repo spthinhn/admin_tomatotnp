@@ -1,25 +1,47 @@
-<?php
-/**
-  * @var \App\View\AppView $this
-  */
-?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('List Albums'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('List Medias'), ['controller' => 'Medias', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Media'), ['controller' => 'Medias', 'action' => 'add']) ?></li>
-    </ul>
-</nav>
-<div class="albums form large-9 medium-8 columns content">
-    <?= $this->Form->create($album) ?>
-    <fieldset>
-        <legend><?= __('Add Album') ?></legend>
-        <?php
-            echo $this->Form->input('title');
-            echo $this->Form->input('description');
-        ?>
-    </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
-    <?= $this->Form->end() ?>
-</div>
+<form method="POST" enctype="multipart/form-data">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="form-group">
+                <label for="album_type">Loại album</label>
+                <select id="album_type" name="type" class="form-control" style="width: 100%" >
+                  <option value="album">Hình ảnh</option>
+                  <option value="video">Video</option>
+                  <option value="banner">Banner</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-xs-12" style="margin-top: 20px">
+            <div class="form-group">
+                <label for="title">Tiêu đề</label>
+                <input type="text" name="title" class="form-control" placeholder="Title" required />
+            </div>
+        </div>
+        <div class="col-xs-12" style="margin-top: 20px">
+            <div class="form-group">
+                <label for="title">Tiêu đề SEO</label>
+                <input type="text" name="alias" class="form-control" placeholder="Title SEO" required />
+            </div>
+        </div>
+        <div class="col-xs-12" style="margin-top: 20px">
+            <div class="form-group">
+                <label for="description">Nội dung</label>
+                <textarea class="summernote" name="description">
+                    
+                </textarea>
+            </div>
+        </div>
+        <div class="col-xs-12" style="margin-top: 20px">
+            <div class="form-group">
+                <label for="description">Hình ảnh đại diện</label>
+                <input type="file" name="files">
+            </div>
+        </div>
+        <div class="col-sm-12 text-right" style="margin-top: 20px">
+            <div class="row">
+                <div class="col-sm-9 col-sm-offset-3">
+                  <button class="btn btn-success btn-quirk btn-wide mr5">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

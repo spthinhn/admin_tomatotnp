@@ -52,6 +52,10 @@ Router::scope('/', function (RouteBuilder $routes) {
     $routes->connect('/', ['controller' => 'Pages', 'action' => 'index']);
     $routes->connect('/san-pham', ['controller' => 'Products', 'action' => 'index']);
     $routes->connect('/san-pham/them-moi', ['controller' => 'Products', 'action' => 'add']);
+
+    $routes->connect('/danh-muc', ['controller' => 'Categories', 'action' => 'index']);
+    $routes->connect('/danh-muc/them-moi', ['controller' => 'Categories', 'action' => 'add']);
+
     $routes->connect('/bai-viet', ['controller' => 'Feeds', 'action' => 'index']);
     $routes->connect('/bai-viet/them-moi', ['controller' => 'Feeds', 'action' => 'add']);
     $routes->connect(
@@ -64,7 +68,23 @@ Router::scope('/', function (RouteBuilder $routes) {
         ['controller' => 'Feeds', 'action' => 'edit'],
         ['id' => '\d+', 'pass' => ['id']]
     );
-    
+
+    $routes->connect(
+        '/thu-vien/:type',
+        ['controller' => 'Albums', 'action' => 'index'],
+        ['type' => '\w+', 'pass' => ['type']]
+    );
+    $routes->connect(
+        '/thu-vien/album/them-moi',
+        ['controller' => 'Albums', 'action' => 'add']
+    );
+
+    $routes->connect('/cai-dat', ['controller' => 'Settings', 'action' => 'index']);
+    $routes->connect('/cai-dat/them-moi', ['controller' => 'Settings', 'action' => 'add']);
+
+    $routes->connect('/medias/add/:id', ['controller' => 'Medias', 'action' => 'add'],
+        ['id' => '\d+', 'pass' => ['id']]
+    );
 
     /**
      * ...and connect the rest of 'Pages' controller's URLs.

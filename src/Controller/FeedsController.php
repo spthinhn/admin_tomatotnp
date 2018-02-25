@@ -55,11 +55,13 @@ class FeedsController extends AppController
         if ($this->request->is('post')) {
             
             $feed = $this->Feeds->patchEntity($feed, $this->request->data);
-            $feed->time_created = time();
+            $feed->created = time();
             if ($result = $this->Feeds->save($feed)) {
                 $last_id = $result->id;
                 $path = WWW_ROOT."upload/bai-viet/$last_id/";
-                mkdir( $path, 0700);
+                if (!file_exists($path)) {
+                    mkdir( $path, 0700);
+                }
                 $feed->thumbnail = "/upload/bai-viet/$last_id/".$feed->files['name'];
                 $this->Feeds->save($feed);
                 move_uploaded_file($feed->files['tmp_name'], $path. $feed->files['name']);
@@ -89,7 +91,7 @@ class FeedsController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $feed = $this->Feeds->patchEntity($feed, $this->request->data);
             if ($this->Feeds->save($feed)) {
-                if ($feed->files) {
+                if (!$feed->files['error']) {
                     $last_id = $feed->id;
                     $path = WWW_ROOT."upload/bai-viet/$last_id/";
                     if (!file_exists($path)) {
