@@ -5,28 +5,13 @@
                 <label for="exampleInputEmail1">title</label>
                 <input type="text" name="name" class="form-control" placeholder="Type your name..." required />
             </div>
+        </div>
+        <div class="col-sm-6">
             <div class="form-group">
                 <label>price <span class="text-danger">*</span></label>
                 <input type="text" name="name" class="form-control" placeholder="Type your name..." required />
             </div>
-            <div class="form-group">
-                <label>info <span class="text-danger">*</span></label>
-                <input type="text" name="name" class="form-control" placeholder="Type your name..." required />
-            </div>
-            <div class="form-group">
-                <label>weight <span class="text-danger">*</span></label>
-                <input type="text" name="name" class="form-control" placeholder="Type your name..." required />
-            </div>
-        </div>
-        <div class="col-sm-6">
-            <div class="form-group">
-                <label>guide_use <span class="text-danger">*</span></label>
-                <input type="text" name="name" class="form-control" placeholder="Type your name..." required />
-            </div>
-            <div class="form-group">
-                <label>guid_preservation <span class="text-danger">*</span></label>
-                <input type="text" name="name" class="form-control" placeholder="Type your name..." required />
-            </div>
+            
             <div class="form-group">
                 <label>expiried <span class="text-danger">*</span></label>
                 <input type="text" name="name" class="form-control" placeholder="Type your name..." required />
@@ -42,23 +27,51 @@
         </div>
         <div class="col-xs-12" style="margin-top: 20px">
             <div class="form-group">
-                <div class="col-sm-12">
-                    <div id="summernote">Hello Summernote</div>
-                </div>
+                <label for="description">Giới thiệu</label>
+                <textarea class="summernote" name="info">
+                </textarea>
+            </div>
+        </div>
+        <div class="col-xs-12" style="margin-top: 20px">
+            <div class="form-group">
+                <label>Khối lượng tịnh <span class="text-danger">*</span></label>
+                <input type="text" name="weight" class="form-control" placeholder="Type your name..." required />
+            </div>
+        </div>
+        <div class="col-xs-12" style="margin-top: 20px">
+            <div class="form-group">
+                <label for="description">Hướng dẫn sử dụng</label>
+                <textarea class="summernote" name="use_guide">
+                </textarea>
+            </div>
+        </div>
+        <div class="col-xs-12" style="margin-top: 20px">
+            <div class="form-group">
+                <label for="description">Hướng dẫn bảo quản</label>
+                <textarea class="summernote" name="preservation_guide">
+                </textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>expiried <span class="text-danger">*</span></label>
+            <input type="text" name="name" class="form-control" placeholder="Type your name..." required />
+        </div>
+        <div class="col-xs-12" style="margin-top: 20px">
+            <div class="form-group">
+                <label for="description">Nội dung</label>
+                <textarea class="summernote" name="description">
+                    
+                </textarea>
             </div>
         </div>
         <div class="col-sm-12">
-            <div class="panel">
-                <div class="panel-heading">
-                    Images
-                </div>
-                <div class="panel-body">
-                    <div class="dropzone">
-                        <div class="fallback">
-                            <input name="file" type="file" multiple />
-                        </div>
-                    </div>
-                </div>
+            <div class="form-group">
+                <label for="exampleInputFile">Hình ảnh</label>
+                <input type="file" name="files[]" id="exampleInputFile">
+                <input type="file" name="files[]" id="exampleInputFile">
+                <input type="file" name="files[]" id="exampleInputFile">
+                <input type="file" name="files[]" id="exampleInputFile">
+                <input type="file" name="files[]" id="exampleInputFile">
             </div>
         </div>
         <div class="col-sm-12 text-right">
