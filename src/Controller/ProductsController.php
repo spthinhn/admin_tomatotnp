@@ -52,17 +52,43 @@ class ProductsController extends AppController
     public function add()
     {
         $this->viewBuilder()->layout('admin');
+        $this->loadModel('Categories');
+        $this->loadModel('ProductImages');
+        $categories = $this->Categories->find('all');
         $product = $this->Products->newEntity();
         if ($this->request->is('post')) {
             $product = $this->Products->patchEntity($product, $this->request->data);
-            if ($this->Products->save($product)) {
+            if ($result = $this->Products->save($product)) {
+                $last_id = $result->id;
+                $path = WWW_ROOT."upload/san-pham/";
+                if (!file_exists($path)) {
+                    mkdir( $path, 0700);
+                }
+                $path = WWW_ROOT."upload/san-pham/$last_id/";
+                if (!file_exists($path)) {
+                    mkdir( $path, 0700);
+                }
+                foreach ($product->files as $key => $file) {
+                    if ($file['error'] == 0) {
+                        $uri = "/upload/san-pham/$last_id/".$file['name'];
+                        $image = $this->ProductImages->newEntity();
+                        $image->image = $uri;
+                        $image->position = $key;
+                        $image->product_id = $last_id;
+                        $this->ProductImages->save($image);
+                        move_uploaded_file($file['tmp_name'], $path. $file['name']);
+                    }
+                }
+                // $feed->thumbnail = "/upload/bai-viet/$last_id/".$feed->files['name'];
+                // $this->Feeds->save($feed);
+
                 $this->Flash->success(__('The product has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('The product could not be saved. Please, try again.'));
         }
-        $categories = $this->Products->Categories->find('list', ['limit' => 200]);
+        // $categories = $this->Products->Categories->find('list', ['limit' => 200]);
         $this->set(compact('product', 'categories'));
         $this->set('_serialize', ['product']);
     }
@@ -76,6 +102,11 @@ class ProductsController extends AppController
      */
     public function edit($id = null)
     {
+        $this->viewBuilder()->layout('admin');
+        $this->loadModel('Categories');
+        $this->loadModel('ProductImages');
+        $categories = $this->Categories->find('all');
+        
         $product = $this->Products->get($id, [
             'contain' => []
         ]);
@@ -88,7 +119,7 @@ class ProductsController extends AppController
             }
             $this->Flash->error(__('The product could not be saved. Please, try again.'));
         }
-        $categories = $this->Products->Categories->find('list', ['limit' => 200]);
+        // $categories = $this->Products->Categories->find('list', ['limit' => 200]);
         $this->set(compact('product', 'categories'));
         $this->set('_serialize', ['product']);
     }
