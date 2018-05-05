@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+// use Cake\Mailer\Email;
 
 /**
  * Products Controller
@@ -18,6 +19,16 @@ class ProductsController extends AppController
      */
     public function index()
     {
+
+        // $email = new Email();
+        // $email->config('default');
+        // $email->transport('default');
+        // $email->from(['focus.nguyen@yandex.com' => 'Administrator']);
+        // $email->to('amelywebmaster@gmail.com');
+        // $email->subject('Đăng ký nhân viên');
+        // $email->send('test');
+        // var_dump($email);die();
+
         $this->viewBuilder()->layout('admin');
         $this->paginate = [
             'contain' => ['Categories']
@@ -73,7 +84,7 @@ class ProductsController extends AppController
                         $uri = "/upload/san-pham/$last_id/".$file['name'];
                         $image = $this->ProductImages->newEntity();
                         $image->image = $uri;
-                        $image->position = $key;
+                        $image->position = $key + 1;
                         $image->product_id = $last_id;
                         $this->ProductImages->save($image);
                         move_uploaded_file($file['tmp_name'], $path. $file['name']);
@@ -108,11 +119,34 @@ class ProductsController extends AppController
         $categories = $this->Categories->find('all');
         
         $product = $this->Products->get($id, [
-            'contain' => []
+            'contain' => ['ProductImages']
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $product = $this->Products->patchEntity($product, $this->request->data);
-            if ($this->Products->save($product)) {
+            if ($result = $this->Products->save($product)) {
+                $last_id = $result->id;
+                $path = WWW_ROOT."upload/san-pham/";
+                if (!file_exists($path)) {
+                    mkdir( $path, 0700);
+                }
+                $path = WWW_ROOT."upload/san-pham/$last_id/";
+                if (!file_exists($path)) {
+                    mkdir( $path, 0700);
+                }
+                foreach ($product->files as $key => $file) {
+                    if ($file['error'] == 0) {
+                        $uri = "/upload/san-pham/$last_id/".$file['name'];
+                        $image = $this->ProductImages->newEntity();
+                        $image->image = $uri;
+                        $image->position = $key + 1;
+                        $image->product_id = $last_id;
+                        $this->ProductImages->save($image);
+                        move_uploaded_file($file['tmp_name'], $path. $file['name']);
+                    }
+                }
+                // $feed->thumbnail = "/upload/bai-viet/$last_id/".$feed->files['name'];
+                // $this->Feeds->save($feed);
+
                 $this->Flash->success(__('The product has been saved.'));
 
                 return $this->redirect(['action' => 'index']);

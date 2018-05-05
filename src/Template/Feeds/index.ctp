@@ -31,7 +31,14 @@
                     <td align="center"><?= $this->Number->format($feed->id) ?></td>
                     <td><?= $this->Html->image($feed->thumbnail, ["width" => "100%"]) ?></td>
                     <td><?= h($feed->title) ?></td>
-                    <td><?= h($feed->summary) ?></td>
+                    <?php 
+                        if (strlen(h($feed->summary)) > 300) {
+                            $out = substr(h($feed->summary),0,300)."...";
+                        } else {
+                            $out = h($feed->summary);
+                        }
+                    ?>
+                    <td><?= $out  ?></td>
                     <td><?= h($feed->created) ?></td>
                     <td class="actions" align="center">
                         <button class="btn btn-primary btn-icon" onclick="location.href=('<?= $this->Url->build([
@@ -42,6 +49,7 @@
                             "action" => "edit",
                             $feed->id
                         ]); ?>')"><i class="fa fa-edit"></i></button>
+                        <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $feed->id], ['confirm' => __('Are you sure you want to delete # {0}?', $feed->id)]) ?>
                     </td>
                 </tr>
                 <?php endforeach; ?>
