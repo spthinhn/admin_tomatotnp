@@ -79,7 +79,7 @@ class AlbumsController extends AppController
 
                 $this->Flash->success(__('The album has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'index', $album->type]);
             }
             $this->Flash->error(__('The album could not be saved. Please, try again.'));
         }

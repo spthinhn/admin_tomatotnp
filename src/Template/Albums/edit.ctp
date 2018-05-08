@@ -1,3 +1,4 @@
+<h1>Chinh sua Album</h1>
 <form method="POST" enctype="multipart/form-data">
     <div class="row">
         <div class="col-xs-12">
