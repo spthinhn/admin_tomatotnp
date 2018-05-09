@@ -58,11 +58,11 @@ class CategoriesController extends AppController
                 $last_id = $result->id;
                 $path = WWW_ROOT."upload/danh-muc/";
                 if (!file_exists($path)) {
-                    mkdir( $path, 0700);
+                    mkdir( $path, 0775);
                 }
                 $path = WWW_ROOT."upload/danh-muc/$last_id/";
                 if (!file_exists($path)) {
-                    mkdir( $path, 0700);
+                    mkdir( $path, 0775);
                 }
                 $category->thumbnail = "/upload/danh-muc/$last_id/".$category->files['name'];
                 $this->Categories->save($category);
@@ -97,11 +97,11 @@ class CategoriesController extends AppController
                     $last_id = $result->id;
                     $path = WWW_ROOT."upload/danh-muc/";
                     if (!file_exists($path)) {
-                        mkdir( $path, 0700);
+                        mkdir( $path, 0775);
                     }
                     $path = WWW_ROOT."upload/danh-muc/$last_id/";
                     if (!file_exists($path)) {
-                        mkdir( $path, 0700);
+                        mkdir( $path, 0775);
                     }
                     $category->thumbnail = "/upload/danh-muc/$last_id/".$category->files['name'];
                     $this->Categories->save($category);

@@ -73,11 +73,11 @@ class ProductsController extends AppController
                 $last_id = $result->id;
                 $path = WWW_ROOT."upload/san-pham/";
                 if (!file_exists($path)) {
-                    mkdir( $path, 0700);
+                    mkdir( $path, 0775);
                 }
                 $path = WWW_ROOT."upload/san-pham/$last_id/";
                 if (!file_exists($path)) {
-                    mkdir( $path, 0700);
+                    mkdir( $path, 0775);
                 }
                 foreach ($product->files as $key => $file) {
                     if ($file['error'] == 0) {
@@ -127,11 +127,11 @@ class ProductsController extends AppController
                 $last_id = $result->id;
                 $path = WWW_ROOT."upload/san-pham/";
                 if (!file_exists($path)) {
-                    mkdir( $path, 0700);
+                    mkdir( $path, 0775);
                 }
                 $path = WWW_ROOT."upload/san-pham/$last_id/";
                 if (!file_exists($path)) {
-                    mkdir( $path, 0700);
+                    mkdir( $path, 0775);
                 }
                 foreach ($product->files as $key => $file) {
                     if ($file['error'] == 0) {
@@ -180,6 +180,19 @@ class ProductsController extends AppController
             $this->Flash->success(__('The product has been deleted.'));
         } else {
             $this->Flash->error(__('The product could not be deleted. Please, try again.'));
+        }
+
+        return $this->redirect(['action' => 'index']);
+    }
+
+    public function deleteImage($id = null)
+    {
+        $this->loadModel('ProductImages');
+        $productImage = $this->ProductImages->get($id);
+        if ($this->ProductImages->delete($productImage)) {
+            $this->Flash->success(__('The product image has been deleted.'));
+        } else {
+            $this->Flash->error(__('The product image could not be deleted. Please, try again.'));
         }
 
         return $this->redirect(['action' => 'index']);

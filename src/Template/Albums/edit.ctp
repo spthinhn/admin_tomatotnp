@@ -34,7 +34,13 @@
         <div class="col-xs-12" style="margin-top: 20px">
             <?php if ($album->thumbnail) : ?>
             <div class="col-xs-2">
-                <?= $this->Html->image($album->thumbnail, ["width" => "100%"]) ?>
+                <?php if ($album->thumbnail) {
+                        $image = $album->thumbnail;
+                    } else {
+                        $image = "/images/image.png";
+                    }
+                ?>
+                <?= $this->Html->image($image, ["width" => "100%"]) ?>
             </div>
             <?php endif; ?>
             <div class="form-group">

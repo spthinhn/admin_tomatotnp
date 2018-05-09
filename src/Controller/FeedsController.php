@@ -60,7 +60,7 @@ class FeedsController extends AppController
                 $last_id = $result->id;
                 $path = WWW_ROOT."upload/bai-viet/$last_id/";
                 if (!file_exists($path)) {
-                    mkdir( $path, 0700);
+                    mkdir( $path, 0775);
                 }
                 $feed->thumbnail = "/upload/bai-viet/$last_id/".$feed->files['name'];
                 $this->Feeds->save($feed);
@@ -95,7 +95,7 @@ class FeedsController extends AppController
                     $last_id = $feed->id;
                     $path = WWW_ROOT."upload/bai-viet/$last_id/";
                     if (!file_exists($path)) {
-                        mkdir( $path, 0700);
+                        mkdir( $path, 0775);
                     }
                     $feed->thumbnail = "/upload/bai-viet/$last_id/".$feed->files['name'];
                     $this->Feeds->save($feed);

@@ -67,11 +67,11 @@ class AlbumsController extends AppController
                 $last_id = $result->id;
                 $path = WWW_ROOT."upload/album/";
                 if (!file_exists($path)) {
-                    mkdir( $path, 0700);
+                    mkdir( $path, 0775);
                 }
                 $path = WWW_ROOT."upload/album/$last_id/";
                 if (!file_exists($path)) {
-                    mkdir( $path, 0700);
+                    mkdir( $path, 0775);
                 }
                 $album->thumbnail = "/upload/album/$last_id/".$album->files['name'];
                 $this->Albums->save($album);
@@ -108,11 +108,11 @@ class AlbumsController extends AppController
                     $last_id = $result->id;
                     $path = WWW_ROOT."upload/album/";
                     if (!file_exists($path)) {
-                        mkdir( $path, 0700);
+                        mkdir( $path, 0775);
                     }
                     $path = WWW_ROOT."upload/album/$last_id/";
                     if (!file_exists($path)) {
-                        mkdir( $path, 0700);
+                        mkdir( $path, 0775);
                     }
                     $album->thumbnail = "/upload/album/$last_id/".$album->files['name'];
                     $this->Albums->save($album);

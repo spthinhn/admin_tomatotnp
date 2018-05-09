@@ -61,15 +61,15 @@ class MediasController extends AppController
                     $last_id = $result->id;
                     $path = WWW_ROOT."upload/thu-vien/";
                     if (!file_exists($path)) {
-                        mkdir( $path, 0700);
+                        mkdir( $path, 0775);
                     }
                     $path = WWW_ROOT."upload/thu-vien/$album_id/";
                     if (!file_exists($path)) {
-                        mkdir( $path, 0700);
+                        mkdir( $path, 0775);
                     }
                     $path = WWW_ROOT."upload/thu-vien/$album_id/$last_id/";
                     if (!file_exists($path)) {
-                        mkdir( $path, 0700);
+                        mkdir( $path, 0775);
                     }
                     $media->uri = "/upload/thu-vien/$album_id/$last_id/".$media->files['name'];
                     $this->Medias->save($media);
