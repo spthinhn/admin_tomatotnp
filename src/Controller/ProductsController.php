@@ -135,7 +135,8 @@ class ProductsController extends AppController
                 }
                 foreach ($product->files as $key => $file) {
                     if ($file['error'] == 0) {
-                        $productImages = $this->ProductImages->find('all')->where(['product_id =' => $last_id, 'position =' => $key]);
+                        $position = $key + 1;
+                        $productImages = $this->ProductImages->find('all')->where(['product_id =' => $last_id, 'position =' => $position]);
                         if ($productImages) {
                             foreach ($productImages as $k => $v) {
                                 $this->ProductImages->delete($v);
@@ -144,7 +145,7 @@ class ProductsController extends AppController
                         $uri = "/upload/san-pham/$last_id/".$file['name'];
                         $image = $this->ProductImages->newEntity();
                         $image->image = $uri;
-                        $image->position = $key + 1;
+                        $image->position = $position;
                         $image->product_id = $last_id;
                         $this->ProductImages->save($image);
                         move_uploaded_file($file['tmp_name'], $path. $file['name']);
