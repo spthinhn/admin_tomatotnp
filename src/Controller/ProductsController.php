@@ -135,6 +135,12 @@ class ProductsController extends AppController
                 }
                 foreach ($product->files as $key => $file) {
                     if ($file['error'] == 0) {
+                        $productImages = $this->ProductImages->find('all')->where(['product_id =' => $last_id, 'position =' => $key]);
+                        if ($productImages) {
+                            foreach ($productImages as $k => $v) {
+                                $this->ProductImages->delete($v);
+                            }
+                        }
                         $uri = "/upload/san-pham/$last_id/".$file['name'];
                         $image = $this->ProductImages->newEntity();
                         $image->image = $uri;
