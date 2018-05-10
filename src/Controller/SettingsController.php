@@ -63,14 +63,14 @@ class SettingsController extends AppController
             if ($result = $this->Settings->save($setting)) {
                 $path = WWW_ROOT."upload/cai-dat/";
                 if (!file_exists($path)) {
-                    mkdir( $path, 0700);
+                    mkdir( $path, 0775);
                 }
                 switch ($setting->type) {
                     case 'introduce':
                         $last_id = $result->id;
                         $path = WWW_ROOT."upload/cai-dat/$last_id/";
                         if (!file_exists($path)) {
-                            mkdir( $path, 0700);
+                            mkdir( $path, 0775);
                         }
                         $setting->body = "/upload/cai-dat/$last_id/".$setting->files['name'];
                         $this->Settings->save($setting);
@@ -80,7 +80,7 @@ class SettingsController extends AppController
                         $last_id = $result->id;
                         $path = WWW_ROOT."upload/cai-dat/$last_id/";
                         if (!file_exists($path)) {
-                            mkdir( $path, 0700);
+                            mkdir( $path, 0775);
                         }
                         $setting->body = "/upload/cai-dat/$last_id/".$setting->files['name'];
                         $this->Settings->save($setting);
@@ -90,7 +90,7 @@ class SettingsController extends AppController
                         $last_id = $result->id;
                         $path = WWW_ROOT."upload/bai-viet/$last_id/";
                         if (!file_exists($path)) {
-                            mkdir( $path, 0700);
+                            mkdir( $path, 0775);
                         }
                         $setting->body = "/upload/bai-viet/$last_id/".$setting->files['name'];
                         $this->Settings->save($setting);

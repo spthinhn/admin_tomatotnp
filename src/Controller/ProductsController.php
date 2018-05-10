@@ -73,11 +73,11 @@ class ProductsController extends AppController
                 $last_id = $result->id;
                 $path = WWW_ROOT."upload/san-pham/";
                 if (!file_exists($path)) {
-                    mkdir( $path, 0700);
+                    mkdir( $path, 0775);
                 }
                 $path = WWW_ROOT."upload/san-pham/$last_id/";
                 if (!file_exists($path)) {
-                    mkdir( $path, 0700);
+                    mkdir( $path, 0775);
                 }
                 foreach ($product->files as $key => $file) {
                     if ($file['error'] == 0) {
@@ -127,18 +127,25 @@ class ProductsController extends AppController
                 $last_id = $result->id;
                 $path = WWW_ROOT."upload/san-pham/";
                 if (!file_exists($path)) {
-                    mkdir( $path, 0700);
+                    mkdir( $path, 0775);
                 }
                 $path = WWW_ROOT."upload/san-pham/$last_id/";
                 if (!file_exists($path)) {
-                    mkdir( $path, 0700);
+                    mkdir( $path, 0775);
                 }
                 foreach ($product->files as $key => $file) {
                     if ($file['error'] == 0) {
+                        $position = $key + 1;
+                        $productImages = $this->ProductImages->find('all')->where(['product_id =' => $last_id, 'position =' => $position]);
+                        if ($productImages) {
+                            foreach ($productImages as $k => $v) {
+                                $this->ProductImages->delete($v);
+                            }
+                        }
                         $uri = "/upload/san-pham/$last_id/".$file['name'];
                         $image = $this->ProductImages->newEntity();
                         $image->image = $uri;
-                        $image->position = $key + 1;
+                        $image->position = $position;
                         $image->product_id = $last_id;
                         $this->ProductImages->save($image);
                         move_uploaded_file($file['tmp_name'], $path. $file['name']);
@@ -173,6 +180,19 @@ class ProductsController extends AppController
             $this->Flash->success(__('The product has been deleted.'));
         } else {
             $this->Flash->error(__('The product could not be deleted. Please, try again.'));
+        }
+
+        return $this->redirect(['action' => 'index']);
+    }
+
+    public function deleteImage($id = null)
+    {
+        $this->loadModel('ProductImages');
+        $productImage = $this->ProductImages->get($id);
+        if ($this->ProductImages->delete($productImage)) {
+            $this->Flash->success(__('The product image has been deleted.'));
+        } else {
+            $this->Flash->error(__('The product image could not be deleted. Please, try again.'));
         }
 
         return $this->redirect(['action' => 'index']);

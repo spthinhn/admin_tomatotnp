@@ -1,9 +1,8 @@
 <?php
-$image1 = "";
-$image2 = "";
-$image3 = "";
-$image4 = "";
-$image5 = "";
+$image1 = ""; $image2 = ""; $image3 = ""; $image4 = ""; $image5 = "";
+$btn1 = ""; $btn2 = ""; $btn3 = ""; $btn4 = ""; $btn5 = "";
+
+
 foreach ($product->product_images as $key => $value) {
     if ($value->position == 1) {
         $image1 = $this->Html->image($value->image, ["width" => "100%"]);
