@@ -35,6 +35,22 @@
                                     $setting->type = "Sứ mệnh";
                                     $setting->body = '<img src="'.$setting->body.'" width="30%" />';
                                     break;
+                                case 'cover-product':
+                                    $setting->type = "Cover sản phẩm";
+                                    $setting->body = '<img src="'.$setting->body.'" width="30%" />';
+                                    break;
+                                case 'cover-news':
+                                    $setting->type = "Cover tin tức";
+                                    $setting->body = '<img src="'.$setting->body.'" width="30%" />';
+                                    break;
+                                case 'cover-lib':
+                                    $setting->type = "Cover thư viện";
+                                    $setting->body = '<img src="'.$setting->body.'" width="30%" />';
+                                    break;
+                                case 'cover-contact':
+                                    $setting->type = "Cover liên hệ";
+                                    $setting->body = '<img src="'.$setting->body.'" width="30%" />';
+                                    break;
                                 case 'company':
                                     $setting->type = "Tên công ty";
                                     break;

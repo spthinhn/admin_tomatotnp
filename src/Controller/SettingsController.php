@@ -96,6 +96,46 @@ class SettingsController extends AppController
                         $this->Settings->save($setting);
                         move_uploaded_file($setting->files['tmp_name'], $path. $setting->files['name']);
                         break;
+                    case 'cover-product':
+                        $last_id = $result->id;
+                        $path = WWW_ROOT."upload/cai-dat/$last_id/";
+                        if (!file_exists($path)) {
+                            mkdir( $path, 0700);
+                        }
+                        $setting->body = "/upload/cai-dat/$last_id/".$setting->files['name'];
+                        $this->Settings->save($setting);
+                        move_uploaded_file($setting->files['tmp_name'], $path. $setting->files['name']);
+                        break;
+                    case 'cover-news':
+                        $last_id = $result->id;
+                        $path = WWW_ROOT."upload/cai-dat/$last_id/";
+                        if (!file_exists($path)) {
+                            mkdir( $path, 0700);
+                        }
+                        $setting->body = "/upload/cai-dat/$last_id/".$setting->files['name'];
+                        $this->Settings->save($setting);
+                        move_uploaded_file($setting->files['tmp_name'], $path. $setting->files['name']);
+                        break;
+                    case 'cover-lib':
+                        $last_id = $result->id;
+                        $path = WWW_ROOT."upload/cai-dat/$last_id/";
+                        if (!file_exists($path)) {
+                            mkdir( $path, 0700);
+                        }
+                        $setting->body = "/upload/cai-dat/$last_id/".$setting->files['name'];
+                        $this->Settings->save($setting);
+                        move_uploaded_file($setting->files['tmp_name'], $path. $setting->files['name']);
+                        break;
+                    case 'cover-contact':
+                        $last_id = $result->id;
+                        $path = WWW_ROOT."upload/cai-dat/$last_id/";
+                        if (!file_exists($path)) {
+                            mkdir( $path, 0700);
+                        }
+                        $setting->body = "/upload/cai-dat/$last_id/".$setting->files['name'];
+                        $this->Settings->save($setting);
+                        move_uploaded_file($setting->files['tmp_name'], $path. $setting->files['name']);
+                        break;
                     default:
                         # code...
                         break;

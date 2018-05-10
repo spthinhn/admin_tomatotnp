@@ -140,6 +140,86 @@
                 </div>
             </div>
         </form>
+
+        <form method="POST" enctype="multipart/form-data">
+            <div class="row">
+                <input type="hidden" name="type" class="form-control" placeholder="Title" value="cover-product" required />
+                <div class="col-xs-6">
+                    <div class="form-group">
+                        <label for="title">Cover sản phẩm</label>
+                        <input type="file" name="files">
+                    </div>
+                </div>
+                <div class="col-xs-3">
+                    <img width="100%" src="/images/png.png">
+                </div>
+                <div class="col-xs-2">
+                    <div class="form-group">
+                        <input type="submit" name="">
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <form method="POST" enctype="multipart/form-data">
+            <div class="row">
+                <input type="hidden" name="type" class="form-control" placeholder="Title" value="cover-news" required />
+                <div class="col-xs-6">
+                    <div class="form-group">
+                        <label for="title">Cover tin tức</label>
+                        <input type="file" name="files">
+                    </div>
+                </div>
+                <div class="col-xs-3">
+                    <img width="100%" src="/images/png.png">
+                </div>
+                <div class="col-xs-2">
+                    <div class="form-group">
+                        <input type="submit" name="">
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <form method="POST" enctype="multipart/form-data">
+            <div class="row">
+                <input type="hidden" name="type" class="form-control" placeholder="Title" value="cover-lib" required />
+                <div class="col-xs-6">
+                    <div class="form-group">
+                        <label for="title">Cover thư viện</label>
+                        <input type="file" name="files">
+                    </div>
+                </div>
+                <div class="col-xs-3">
+                    <img width="100%" src="/images/png.png">
+                </div>
+                <div class="col-xs-2">
+                    <div class="form-group">
+                        <input type="submit" name="">
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <form method="POST" enctype="multipart/form-data">
+            <div class="row">
+                <input type="hidden" name="type" class="form-control" placeholder="Title" value="cover-contact" required />
+                <div class="col-xs-6">
+                    <div class="form-group">
+                        <label for="title">Cover liên hệ</label>
+                        <input type="file" name="files">
+                    </div>
+                </div>
+                <div class="col-xs-3">
+                    <img width="100%" src="/images/png.png">
+                </div>
+                <div class="col-xs-2">
+                    <div class="form-group">
+                        <input type="submit" name="">
+                    </div>
+                </div>
+            </div>
+        </form>
     </div>
 </div>
 
