@@ -74,7 +74,7 @@ class CategoriesController extends AppController
                     $this->Categories->save($category);
                     move_uploaded_file($category->cover['tmp_name'], $path. $category->cover['name']);   
                 }
-              
+
                 $this->Flash->success(__('The category has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
@@ -101,26 +101,26 @@ class CategoriesController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $category = $this->Categories->patchEntity($category, $this->request->data);
             if ($result = $this->Categories->save($category)) {
-                if ($category->files['name']) {
-                    $last_id = $result->id;
-                    $path = WWW_ROOT."upload/danh-muc/";
-                    if (!file_exists($path)) {
-                        mkdir( $path, 0775);
-                    }
-                    $path = WWW_ROOT."upload/danh-muc/$last_id/";
-                    if (!file_exists($path)) {
-                        mkdir( $path, 0775);
-                    }
-                    if ($category->files['error'] == 0) {
-                        $category->thumbnail = "/upload/danh-muc/$last_id/".$category->files['name'];
-                        $this->Categories->save($category);
-                        move_uploaded_file($category->files['tmp_name'], $path. $category->files['name']);
-                    }
-                    if ($category->cover['error'] == 0) {
-                        $category->cover = "/upload/danh-muc/$last_id/".$category->cover['name'];
-                        $this->Categories->save($category);
-                        move_uploaded_file($category->cover['tmp_name'], $path. $category->cover['name']);   
-                    }
+                $last_id = $result->id;
+                $path = WWW_ROOT."upload/danh-muc/";
+                if (!file_exists($path)) {
+                    mkdir( $path, 0775);
+                }
+                $path = WWW_ROOT."upload/danh-muc/$last_id/";
+                if (!file_exists($path)) {
+                    mkdir( $path, 0775);
+                }
+
+                if ($category->files['error'] == 0) {
+                    $category->thumbnail = "/upload/danh-muc/$last_id/".$category->files['name'];
+                    $this->Categories->save($category);
+                    move_uploaded_file($category->files['tmp_name'], $path. $category->files['name']);
+                }
+                
+                if ($category->cover['error'] == 0) {
+                    $category->cover = "/upload/danh-muc/$last_id/".$category->cover['name'];
+                    $this->Categories->save($category);
+                    move_uploaded_file($category->cover['tmp_name'], $path. $category->cover['name']);   
                 }
                 $this->Flash->success(__('The category has been saved.'));
 
