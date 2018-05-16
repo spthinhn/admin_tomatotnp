@@ -67,11 +67,11 @@ class CategoriesController extends AppController
                 foreach ($category->files as $key => $file) {
                     if ($file['error'] == 0) {
                         if ($key == 0) {
-                            $category->thumbnail = "/upload/danh-muc/$last_id/".$category->files['name'];
-                            move_uploaded_file($category->files['tmp_name'], $path. $category->files['name']);
+                            $category->thumbnail = "/upload/danh-muc/$last_id/".$file['name'];
+                            move_uploaded_file($file['tmp_name'], $path. $file['name']);
                         } else {
-                            $category->cover = "/upload/danh-muc/$last_id/".$category->cover['name'];
-                            move_uploaded_file($category->cover['tmp_name'], $path. $category->cover['name']);  
+                            $category->cover = "/upload/danh-muc/$last_id/".$file['name'];
+                            move_uploaded_file($file['tmp_name'], $path. $file['name']);  
                         }
                     }
                 }
@@ -115,11 +115,11 @@ class CategoriesController extends AppController
                 foreach ($category->files as $key => $file) {
                     if ($file['error'] == 0) {
                         if ($key == 0) {
-                            $category->thumbnail = "/upload/danh-muc/$last_id/".$category->files['name'];
-                            move_uploaded_file($category->files['tmp_name'], $path. $category->files['name']);
+                            $category->thumbnail = "/upload/danh-muc/$last_id/".$file['name'];
+                            move_uploaded_file($file['tmp_name'], $path. $file['name']);
                         } else {
-                            $category->cover = "/upload/danh-muc/$last_id/".$category->cover['name'];
-                            move_uploaded_file($category->cover['tmp_name'], $path. $category->cover['name']);  
+                            $category->cover = "/upload/danh-muc/$last_id/".$file['name'];
+                            move_uploaded_file($file['tmp_name'], $path. $file['name']);  
                         }
                     }
                 }
