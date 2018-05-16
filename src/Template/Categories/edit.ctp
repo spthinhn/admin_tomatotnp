@@ -30,6 +30,15 @@
                 <label for="description">Hình ảnh đại diện</label>
                 <input type="file" name="files">
             </div>
+            <?php if ($category->cover) : ?>
+            <div class="col-xs-2">
+                <?= $this->Html->image($category->cover, ["width" => "100%"]) ?>
+            </div>
+            <?php endif; ?>
+            <div class="form-group">
+                <label for="description">Cover</label>
+                <input type="file" name="cover">
+            </div>
         </div>
         <div class="col-sm-12 text-right" style="margin-top: 20px">
             <div class="row">
