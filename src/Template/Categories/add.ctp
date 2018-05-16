@@ -27,7 +27,7 @@
             </div>
             <div class="form-group">
                 <label for="description">Cover</label>
-                <input type="file" name="files">
+                <input type="file" name="cover">
             </div>
         </div>
         <div class="col-sm-12 text-right" style="margin-top: 20px">

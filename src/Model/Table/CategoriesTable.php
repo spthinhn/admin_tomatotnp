@@ -68,6 +68,9 @@ class CategoriesTable extends Table
         $validator
             ->allowEmpty('thumbnail');
 
+        $validator
+            ->allowEmpty('cover');
+
         return $validator;
     }
 }
