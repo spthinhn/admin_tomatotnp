@@ -28,7 +28,7 @@
             <?php endif; ?>
             <div class="form-group">
                 <label for="description">Hình ảnh đại diện</label>
-                <input type="file" name="files">
+                <input type="file" name="files[]">
             </div>
             <?php if ($category->cover) : ?>
             <div class="col-xs-2">
@@ -37,7 +37,7 @@
             <?php endif; ?>
             <div class="form-group">
                 <label for="description">Cover</label>
-                <input type="file" name="cover">
+                <input type="file" name="files[]">
             </div>
         </div>
         <div class="col-sm-12 text-right" style="margin-top: 20px">

@@ -64,16 +64,18 @@ class CategoriesController extends AppController
                 if (!file_exists($path)) {
                     mkdir( $path, 0775);
                 }
-                if ($category->files['error'] == 0) {
-                    $category->thumbnail = "/upload/danh-muc/$last_id/".$category->files['name'];
-                    $this->Categories->save($category);
-                    move_uploaded_file($category->files['tmp_name'], $path. $category->files['name']);
+                foreach ($category->files as $key => $file) {
+                    if ($file['error'] == 0) {
+                        if ($key == 0) {
+                            $category->thumbnail = "/upload/danh-muc/$last_id/".$category->files['name'];
+                            move_uploaded_file($category->files['tmp_name'], $path. $category->files['name']);
+                        } else {
+                            $category->cover = "/upload/danh-muc/$last_id/".$category->cover['name'];
+                            move_uploaded_file($category->cover['tmp_name'], $path. $category->cover['name']);  
+                        }
+                    }
                 }
-                if ($category->cover['error'] == 0) {
-                    $category->cover = "/upload/danh-muc/$last_id/".$category->cover['name'];
-                    $this->Categories->save($category);
-                    move_uploaded_file($category->cover['tmp_name'], $path. $category->cover['name']);   
-                }
+                $this->Categories->save($category);
 
                 $this->Flash->success(__('The category has been saved.'));
 
@@ -110,15 +112,16 @@ class CategoriesController extends AppController
                 if (!file_exists($path)) {
                     mkdir( $path, 0775);
                 }
-
-                if ($category->files['name']) {
-                    $category->thumbnail = "/upload/danh-muc/$last_id/".$category->files['name'];
-                    move_uploaded_file($category->files['tmp_name'], $path. $category->files['name']);
-                }
-
-                if ($category->cover['name']) {
-                    $category->cover = "/upload/danh-muc/$last_id/".$category->cover['name'];
-                    move_uploaded_file($category->cover['tmp_name'], $path. $category->cover['name']);   
+                foreach ($category->files as $key => $file) {
+                    if ($file['error'] == 0) {
+                        if ($key == 0) {
+                            $category->thumbnail = "/upload/danh-muc/$last_id/".$category->files['name'];
+                            move_uploaded_file($category->files['tmp_name'], $path. $category->files['name']);
+                        } else {
+                            $category->cover = "/upload/danh-muc/$last_id/".$category->cover['name'];
+                            move_uploaded_file($category->cover['tmp_name'], $path. $category->cover['name']);  
+                        }
+                    }
                 }
                 $this->Categories->save($category);
                 $this->Flash->success(__('The category has been saved.'));

@@ -23,11 +23,11 @@
         <div class="col-xs-12" style="margin-top: 20px">
             <div class="form-group">
                 <label for="description">Hình ảnh đại diện</label>
-                <input type="file" name="files">
+                <input type="file" name="files[]">
             </div>
             <div class="form-group">
                 <label for="description">Cover</label>
-                <input type="file" name="cover">
+                <input type="file" name="files[]">
             </div>
         </div>
         <div class="col-sm-12 text-right" style="margin-top: 20px">
