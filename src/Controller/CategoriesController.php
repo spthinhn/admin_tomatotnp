@@ -111,17 +111,16 @@ class CategoriesController extends AppController
                     mkdir( $path, 0775);
                 }
 
-                if ($category->files['error'] == 0) {
+                if ($category->files['name']) {
                     $category->thumbnail = "/upload/danh-muc/$last_id/".$category->files['name'];
-                    $this->Categories->save($category);
                     move_uploaded_file($category->files['tmp_name'], $path. $category->files['name']);
                 }
-                
-                if ($category->cover['error'] == 0) {
+
+                if ($category->cover['name']) {
                     $category->cover = "/upload/danh-muc/$last_id/".$category->cover['name'];
-                    $this->Categories->save($category);
                     move_uploaded_file($category->cover['tmp_name'], $path. $category->cover['name']);   
                 }
+                $this->Categories->save($category);
                 $this->Flash->success(__('The category has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
