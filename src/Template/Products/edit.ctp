@@ -90,7 +90,7 @@ foreach ($product->product_images as $key => $value) {
         <div class="col-xs-12" style="margin-top: 20px">
             <div class="form-group">
                 <label>Hạn sử dụng</label>
-                <input type="text" name="expiried" class="form-control" value="<?= $product->expiried ?>" />
+                <textarea class="summernote" name="expiried"><?= $product->expiried ?></textarea>
             </div>
         </div>
         <div class="col-xs-12" style="margin-top: 20px">
