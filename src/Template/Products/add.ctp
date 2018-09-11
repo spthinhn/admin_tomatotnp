@@ -35,7 +35,7 @@
         <div class="col-xs-12" style="margin-top: 20px">
             <div class="form-group">
                 <label>Khối lượng tịnh</label>
-                <input type="text" name="weight" class="form-control"/>
+                <textarea class="summernote" name="weight"></textarea>
             </div>
         </div>
         <div class="col-xs-12" style="margin-top: 20px">
@@ -53,7 +53,7 @@
         <div class="col-xs-12" style="margin-top: 20px">
             <div class="form-group">
                 <label>Hạn sử dụng</label>
-                <input type="text" name="expiried" class="form-control" />
+                <textarea class="summernote" name="expiried"></textarea>
             </div>
         </div>
         <div class="col-xs-12" style="margin-top: 20px">

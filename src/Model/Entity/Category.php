@@ -11,6 +11,7 @@ use Cake\ORM\Entity;
  * @property string $description
  * @property string $alias
  * @property string $thumbnail
+ * @property string $cover
  *
  * @property \App\Model\Entity\Product[] $products
  */

@@ -72,7 +72,7 @@ foreach ($product->product_images as $key => $value) {
         <div class="col-xs-12" style="margin-top: 20px">
             <div class="form-group">
                 <label>Khối lượng tịnh</label>
-                <input type="text" name="weight" class="form-control" value="<?= $product->weight ?>" />
+                <textarea class="summernote" name="weight"><?= $product->weight ?></textarea>
             </div>
         </div>
         <div class="col-xs-12" style="margin-top: 20px">
@@ -90,7 +90,7 @@ foreach ($product->product_images as $key => $value) {
         <div class="col-xs-12" style="margin-top: 20px">
             <div class="form-group">
                 <label>Hạn sử dụng</label>
-                <input type="text" name="expiried" class="form-control" value="<?= $product->expiried ?>" />
+                <textarea class="summernote" name="expiried"><?= $product->expiried ?></textarea>
             </div>
         </div>
         <div class="col-xs-12" style="margin-top: 20px">

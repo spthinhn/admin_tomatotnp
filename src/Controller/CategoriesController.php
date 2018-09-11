@@ -76,9 +76,19 @@ class CategoriesController extends AppController
                 if (!file_exists($path)) {
                     mkdir( $path, 0775);
                 }
-                $category->thumbnail = "/upload/danh-muc/$last_id/".$category->files['name'];
+                foreach ($category->files as $key => $file) {
+                    if ($file['error'] == 0) {
+                        if ($key == 0) {
+                            $category->thumbnail = "/upload/danh-muc/$last_id/".$file['name'];
+                            move_uploaded_file($file['tmp_name'], $path. $file['name']);
+                        } else {
+                            $category->cover = "/upload/danh-muc/$last_id/".$file['name'];
+                            move_uploaded_file($file['tmp_name'], $path. $file['name']);  
+                        }
+                    }
+                }
                 $this->Categories->save($category);
-                move_uploaded_file($category->files['tmp_name'], $path. $category->files['name']);
+
                 $this->Flash->success(__('The category has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
@@ -109,20 +119,27 @@ class CategoriesController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $category = $this->Categories->patchEntity($category, $this->request->data);
             if ($result = $this->Categories->save($category)) {
-                if ($category->files['name']) {
-                    $last_id = $result->id;
-                    $path = WWW_ROOT."upload/danh-muc/";
-                    if (!file_exists($path)) {
-                        mkdir( $path, 0775);
-                    }
-                    $path = WWW_ROOT."upload/danh-muc/$last_id/";
-                    if (!file_exists($path)) {
-                        mkdir( $path, 0775);
-                    }
-                    $category->thumbnail = "/upload/danh-muc/$last_id/".$category->files['name'];
-                    $this->Categories->save($category);
-                    move_uploaded_file($category->files['tmp_name'], $path. $category->files['name']);
+                $last_id = $result->id;
+                $path = WWW_ROOT."upload/danh-muc/";
+                if (!file_exists($path)) {
+                    mkdir( $path, 0775);
                 }
+                $path = WWW_ROOT."upload/danh-muc/$last_id/";
+                if (!file_exists($path)) {
+                    mkdir( $path, 0775);
+                }
+                foreach ($category->files as $key => $file) {
+                    if ($file['error'] == 0) {
+                        if ($key == 0) {
+                            $category->thumbnail = "/upload/danh-muc/$last_id/".$file['name'];
+                            move_uploaded_file($file['tmp_name'], $path. $file['name']);
+                        } else {
+                            $category->cover = "/upload/danh-muc/$last_id/".$file['name'];
+                            move_uploaded_file($file['tmp_name'], $path. $file['name']);  
+                        }
+                    }
+                }
+                $this->Categories->save($category);
                 $this->Flash->success(__('The category has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
