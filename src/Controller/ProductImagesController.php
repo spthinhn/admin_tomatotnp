@@ -18,6 +18,10 @@ class ProductImagesController extends AppController
      */
     public function index()
     {
+        if (!$this->request->session()->read('login')) {
+            return $this->redirect(['controller' => 'Pages', 'action' => 'index']);
+        }
+        
         $this->paginate = [
             'contain' => ['Products']
         ];
@@ -36,6 +40,10 @@ class ProductImagesController extends AppController
      */
     public function view($id = null)
     {
+        if (!$this->request->session()->read('login')) {
+            return $this->redirect(['controller' => 'Pages', 'action' => 'index']);
+        }
+        
         $productImage = $this->ProductImages->get($id, [
             'contain' => ['Products']
         ]);
@@ -51,6 +59,10 @@ class ProductImagesController extends AppController
      */
     public function add()
     {
+        if (!$this->request->session()->read('login')) {
+            return $this->redirect(['controller' => 'Pages', 'action' => 'index']);
+        }
+        
         $productImage = $this->ProductImages->newEntity();
         if ($this->request->is('post')) {
             $productImage = $this->ProductImages->patchEntity($productImage, $this->request->data);
@@ -75,6 +87,10 @@ class ProductImagesController extends AppController
      */
     public function edit($id = null)
     {
+        if (!$this->request->session()->read('login')) {
+            return $this->redirect(['controller' => 'Pages', 'action' => 'index']);
+        }
+        
         $productImage = $this->ProductImages->get($id, [
             'contain' => []
         ]);
@@ -101,6 +117,10 @@ class ProductImagesController extends AppController
      */
     public function delete($id = null)
     {
+        if (!$this->request->session()->read('login')) {
+            return $this->redirect(['controller' => 'Pages', 'action' => 'index']);
+        }
+        
         $this->request->allowMethod(['post', 'delete']);
         $productImage = $this->ProductImages->get($id);
         if ($this->ProductImages->delete($productImage)) {

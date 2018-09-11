@@ -18,6 +18,10 @@ class CategoriesController extends AppController
      */
     public function index()
     {
+        if (!$this->request->session()->read('login')) {
+            return $this->redirect(['controller' => 'Pages', 'action' => 'index']);
+        }
+        
         $this->viewBuilder()->layout('admin');
         $categories = $this->paginate($this->Categories);
 
@@ -34,6 +38,10 @@ class CategoriesController extends AppController
      */
     public function view($id = null)
     {
+        if (!$this->request->session()->read('login')) {
+            return $this->redirect(['controller' => 'Pages', 'action' => 'index']);
+        }
+        
         $this->viewBuilder()->layout('admin');
         $category = $this->Categories->get($id, [
             'contain' => ['Products']
@@ -50,6 +58,10 @@ class CategoriesController extends AppController
      */
     public function add()
     {
+        if (!$this->request->session()->read('login')) {
+            return $this->redirect(['controller' => 'Pages', 'action' => 'index']);
+        }
+        
         $this->viewBuilder()->layout('admin');
         $category = $this->Categories->newEntity();
         if ($this->request->is('post')) {
@@ -86,6 +98,10 @@ class CategoriesController extends AppController
      */
     public function edit($id = null)
     {
+        if (!$this->request->session()->read('login')) {
+            return $this->redirect(['controller' => 'Pages', 'action' => 'index']);
+        }
+        
         $this->viewBuilder()->layout('admin');
         $category = $this->Categories->get($id, [
             'contain' => []
@@ -126,6 +142,10 @@ class CategoriesController extends AppController
      */
     public function delete($id = null)
     {
+        if (!$this->request->session()->read('login')) {
+            return $this->redirect(['controller' => 'Pages', 'action' => 'index']);
+        }
+        
         $this->request->allowMethod(['post', 'delete']);
         $category = $this->Categories->get($id);
         if ($this->Categories->delete($category)) {

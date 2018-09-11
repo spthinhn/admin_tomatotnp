@@ -18,6 +18,10 @@ class MediasController extends AppController
      */
     public function index()
     {
+        if (!$this->request->session()->read('login')) {
+            return $this->redirect(['controller' => 'Pages', 'action' => 'index']);
+        }
+        
         $this->paginate = [
             'contain' => ['Albums']
         ];
@@ -36,6 +40,10 @@ class MediasController extends AppController
      */
     public function view($id = null)
     {
+        if (!$this->request->session()->read('login')) {
+            return $this->redirect(['controller' => 'Pages', 'action' => 'index']);
+        }
+        
         $media = $this->Medias->get($id, [
             'contain' => ['Albums']
         ]);
@@ -51,6 +59,10 @@ class MediasController extends AppController
      */
     public function add($album_id)
     {
+        if (!$this->request->session()->read('login')) {
+            return $this->redirect(['controller' => 'Pages', 'action' => 'index']);
+        }
+        
         $this->viewBuilder()->layout('admin');
         $media = $this->Medias->newEntity();
         if ($this->request->is('post')) {
@@ -95,6 +107,10 @@ class MediasController extends AppController
      */
     public function edit($id = null)
     {
+        if (!$this->request->session()->read('login')) {
+            return $this->redirect(['controller' => 'Pages', 'action' => 'index']);
+        }
+        
         $media = $this->Medias->get($id, [
             'contain' => []
         ]);
@@ -121,6 +137,10 @@ class MediasController extends AppController
      */
     public function delete($id = null)
     {
+        if (!$this->request->session()->read('login')) {
+            return $this->redirect(['controller' => 'Pages', 'action' => 'index']);
+        }
+        
         $media = $this->Medias->get($id);
         if ($this->Medias->delete($media)) {
             $this->Flash->success(__('The media has been deleted.'));

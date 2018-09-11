@@ -17,6 +17,10 @@ class SettingsController extends AppController
      */
     public function index()
     {
+        if (!$this->request->session()->read('login')) {
+            return $this->redirect(['controller' => 'Pages', 'action' => 'index']);
+        }
+        
         $this->viewBuilder()->layout('admin');
         $settings = $this->paginate($this->Settings);
 
@@ -33,6 +37,10 @@ class SettingsController extends AppController
      */
     public function view($id = null)
     {
+        if (!$this->request->session()->read('login')) {
+            return $this->redirect(['controller' => 'Pages', 'action' => 'index']);
+        }
+        
         $this->viewBuilder()->layout('admin');
         // $setting = $this->Settings->get($id, [
         //     'contain' => []
@@ -49,6 +57,10 @@ class SettingsController extends AppController
      */
     public function add()
     {
+        if (!$this->request->session()->read('login')) {
+            return $this->redirect(['controller' => 'Pages', 'action' => 'index']);
+        }
+        
         $this->viewBuilder()->layout('admin');
         $setting = $this->Settings->newEntity();
         if ($this->request->is('post')) {
@@ -159,6 +171,10 @@ class SettingsController extends AppController
      */
     public function edit($id = null)
     {
+        if (!$this->request->session()->read('login')) {
+            return $this->redirect(['controller' => 'Pages', 'action' => 'index']);
+        }
+        
         $setting = $this->Settings->get($id, [
             'contain' => []
         ]);
@@ -184,6 +200,10 @@ class SettingsController extends AppController
      */
     public function delete($id = null)
     {
+        if (!$this->request->session()->read('login')) {
+            return $this->redirect(['controller' => 'Pages', 'action' => 'index']);
+        }
+        
         $setting = $this->Settings->get($id);
         if ($this->Settings->delete($setting)) {
             $this->Flash->success(__('The setting has been deleted.'));

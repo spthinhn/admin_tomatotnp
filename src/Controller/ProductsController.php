@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\View\Helper\SessionHelper;
 // use Cake\Mailer\Email;
 
 /**
@@ -17,9 +18,12 @@ class ProductsController extends AppController
      *
      * @return \Cake\Network\Response|null
      */
+
     public function index()
     {
-
+        if (!$this->request->session()->read('login')) {
+            return $this->redirect(['controller' => 'Pages', 'action' => 'index']);
+        }
         // $email = new Email();
         // $email->config('default');
         // $email->transport('default');
@@ -47,6 +51,10 @@ class ProductsController extends AppController
      */
     public function view($id = null)
     {
+        if (!$this->request->session()->read('login')) {
+            return $this->redirect(['controller' => 'Pages', 'action' => 'index']);
+        }
+
         $product = $this->Products->get($id, [
             'contain' => ['Categories']
         ]);
@@ -62,6 +70,11 @@ class ProductsController extends AppController
      */
     public function add()
     {
+        if (!$this->request->session()->read('login')) {
+            return $this->redirect(['controller' => 'Pages', 'action' => 'index']);
+        }
+        
+
         $this->viewBuilder()->layout('admin');
         $this->loadModel('Categories');
         $this->loadModel('ProductImages');
@@ -113,6 +126,10 @@ class ProductsController extends AppController
      */
     public function edit($id = null)
     {
+        if (!$this->request->session()->read('login')) {
+            return $this->redirect(['controller' => 'Pages', 'action' => 'index']);
+        }
+        
         $this->viewBuilder()->layout('admin');
         $this->loadModel('Categories');
         $this->loadModel('ProductImages');
@@ -174,6 +191,10 @@ class ProductsController extends AppController
      */
     public function delete($id = null)
     {
+        if (!$this->request->session()->read('login')) {
+            return $this->redirect(['controller' => 'Pages', 'action' => 'index']);
+        }
+        
         $this->request->allowMethod(['post', 'delete']);
         $product = $this->Products->get($id);
         if ($this->Products->delete($product)) {
@@ -187,6 +208,10 @@ class ProductsController extends AppController
 
     public function deleteImage($id = null)
     {
+        if (!$this->request->session()->read('login')) {
+            return $this->redirect(['controller' => 'Pages', 'action' => 'index']);
+        }
+        
         $this->loadModel('ProductImages');
         $productImage = $this->ProductImages->get($id);
         if ($this->ProductImages->delete($productImage)) {

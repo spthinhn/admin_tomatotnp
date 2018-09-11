@@ -178,13 +178,13 @@ return [
      */
     'EmailTransport' => [
         'default' => [
-            'className' => 'Mail',
+            'className' => 'Smtp',
             // The following keys are used in SMTP transports
-            'host' => 'localhost',
-            'port' => 25,
+            'host' => 'in-v3.mailjet.com',
+            'port' => 587,
             'timeout' => 30,
-            'username' => 'user',
-            'password' => 'secret',
+            'username' => '50ec3b3a7ad4b16512643332b7dd4c4c',
+            'password' => '557e497876acddd70944b832cfc1fb1b',
             'client' => null,
             'tls' => null,
             'url' => env('EMAIL_TRANSPORT_DEFAULT_URL', null),
@@ -342,5 +342,8 @@ return [
      */
     'Session' => [
         'defaults' => 'php',
+        'ini' => [
+            'session.cookie_lifetime' => 1800
+        ]
     ],
 ];

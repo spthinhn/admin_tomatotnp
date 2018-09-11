@@ -18,6 +18,10 @@ class AlbumsController extends AppController
      */
     public function index($type)
     {
+        if (!$this->request->session()->read('login')) {
+            return $this->redirect(['controller' => 'Pages', 'action' => 'index']);
+        }
+        
         // switch ($type) {
         //     case '':
         //         # code...
@@ -42,6 +46,10 @@ class AlbumsController extends AppController
      */
     public function view($id = null)
     {
+        if (!$this->request->session()->read('login')) {
+            return $this->redirect(['controller' => 'Pages', 'action' => 'index']);
+        }
+        
         $this->viewBuilder()->layout('admin');
         $album = $this->Albums->get($id, [
             'contain' => ['Medias']
@@ -58,6 +66,10 @@ class AlbumsController extends AppController
      */
     public function add()
     {
+        if (!$this->request->session()->read('login')) {
+            return $this->redirect(['controller' => 'Pages', 'action' => 'index']);
+        }
+        
         $this->viewBuilder()->layout('admin');
         $album = $this->Albums->newEntity();
         if ($this->request->is('post')) {
@@ -96,6 +108,10 @@ class AlbumsController extends AppController
      */
     public function edit($id = null)
     {
+        if (!$this->request->session()->read('login')) {
+            return $this->redirect(['controller' => 'Pages', 'action' => 'index']);
+        }
+        
         $this->viewBuilder()->layout('admin');
         $album = $this->Albums->get($id, [
             'contain' => []
@@ -138,6 +154,10 @@ class AlbumsController extends AppController
      */
     public function delete($id = null)
     {
+        if (!$this->request->session()->read('login')) {
+            return $this->redirect(['controller' => 'Pages', 'action' => 'index']);
+        }
+        
         $this->request->allowMethod(['post', 'delete']);
         $album = $this->Albums->get($id);
         if ($this->Albums->delete($album)) {

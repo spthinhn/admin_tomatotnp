@@ -18,6 +18,10 @@ class FeedsController extends AppController
      */
     public function index()
     {
+        if (!$this->request->session()->read('login')) {
+            return $this->redirect(['controller' => 'Pages', 'action' => 'index']);
+        }
+        
         $this->viewBuilder()->layout('admin');
         $feeds = $this->paginate($this->Feeds);
 
@@ -34,6 +38,10 @@ class FeedsController extends AppController
      */
     public function view($id = null)
     {
+        if (!$this->request->session()->read('login')) {
+            return $this->redirect(['controller' => 'Pages', 'action' => 'index']);
+        }
+        
         $this->viewBuilder()->layout('admin');
         $feed = $this->Feeds->get($id, [
             'contain' => []
@@ -50,6 +58,10 @@ class FeedsController extends AppController
      */
     public function add()
     {
+        if (!$this->request->session()->read('login')) {
+            return $this->redirect(['controller' => 'Pages', 'action' => 'index']);
+        }
+        
         $this->viewBuilder()->layout('admin');
         $feed = $this->Feeds->newEntity();
         if ($this->request->is('post')) {
@@ -84,6 +96,10 @@ class FeedsController extends AppController
      */
     public function edit($id = null)
     {
+        if (!$this->request->session()->read('login')) {
+            return $this->redirect(['controller' => 'Pages', 'action' => 'index']);
+        }
+        
         $this->viewBuilder()->layout('admin');
         $feed = $this->Feeds->get($id, [
             'contain' => []
@@ -120,6 +136,10 @@ class FeedsController extends AppController
      */
     public function delete($id = null)
     {
+        if (!$this->request->session()->read('login')) {
+            return $this->redirect(['controller' => 'Pages', 'action' => 'index']);
+        }
+        
         $this->request->allowMethod(['post', 'delete']);
         $feed = $this->Feeds->get($id);
         if ($this->Feeds->delete($feed)) {

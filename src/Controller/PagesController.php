@@ -39,11 +39,27 @@ class PagesController extends AppController
      */
     public function index()
     {
-        $this->viewBuilder()->layout('admin');
+        $this->viewBuilder()->layout('login');
+
+        if ($this->request->is('post')) {
+            $data = $this->request->data;
+            $username = $data["username"];
+            $password = $data["password"];
+            if ($username == "administrator@tomatotnp.com" && $password == "vX!B)@k,S4tYt6._") {
+                $this->request->session()->write('login', true);
+                return $this->redirect(['controller' => 'Products', 'action' => 'index']);
+            }
+            $this->request->session()->write('login', false);
+            return $this->redirect(['action' => 'index']);
+        }
     }
 
     public function products()
     {
+        if (!$this->request->session()->read('login')) {
+            return $this->redirect(['controller' => 'Pages', 'action' => 'index']);
+        }
+        
         $this->viewBuilder()->layout('admin');
     }
 }
