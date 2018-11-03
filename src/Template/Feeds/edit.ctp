@@ -6,6 +6,20 @@
 
 <form method="POST" enctype="multipart/form-data">
     <div class="row">
+        <div class="col-xs-12" style="margin-top: 20px">
+            <div class="form-group">
+                <label for="title">Meta tiêu đề</label>
+                <input type="text" name="meta_title" class="form-control" placeholder="Title" value="<?= $feed->meta_title ?>" />
+            </div>
+        </div>
+        <div class="col-xs-12" style="margin-top: 20px">
+            <div class="form-group">
+                <label for="summary">Meta mô tả</label>
+                <textarea class="summernote" name="meta_description">
+                    <?= $feed->meta_description ?>
+                </textarea>
+            </div>
+        </div>
         <div class="col-xs-12">
             <div class="form-group">
                 <label for="post_type">Loại bài viết</label>
