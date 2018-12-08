@@ -58,7 +58,7 @@
         </div>
         <div class="col-xs-12" style="margin-top: 20px">
             <div class="form-group">
-                <label for="description">Nhà phân phối</label>
+                <label for="description">Liên hệ</label>
                 <textarea class="summernote" name="distribution"></textarea>
             </div>
         </div>

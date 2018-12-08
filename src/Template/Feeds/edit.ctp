@@ -15,9 +15,7 @@
         <div class="col-xs-12" style="margin-top: 20px">
             <div class="form-group">
                 <label for="summary">Meta mô tả</label>
-                <textarea class="summernote" name="meta_description">
-                    <?= $feed->meta_description ?>
-                </textarea>
+                <input type="text" name="meta_description" class="form-control" placeholder="Title" value="<?= $feed->meta_description ?>" />
             </div>
         </div>
         <div class="col-xs-12">
